@@ -16,7 +16,7 @@ const stateLink = withClientState({
 })
 
 const httpLink = createHttpLink({
-  uri: 'https://dog-graphql-api.glitch.me/graphql',
+  uri: 'https://r10.academy.red/graphql',
   // credentials: 'include'
 })
 

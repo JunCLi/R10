@@ -2,24 +2,70 @@ import { createAppContainer, createStackNavigator, createBottomTabNavigator } fr
 
 import { getTabBarIcon } from './TabBarIcons'
 
-import Home from '../home/Home'
+import About from '../about/About'
+import AppMap from '../appMap/AppMap'
+import Faves from '../faves/Faves'
+import Schedule from '../schedule/Schedule'
 
-const HomeStack = createStackNavigator(
+
+const AboutStack = createStackNavigator(
 	{
-		Home: {
-			screen: Home
+		About: {
+			screen: About
 		}
 	},
 	{
-		initialRouteName: 'Home'
+		initialRouteName: 'About'
+	}
+)
+
+const FavesStack = createStackNavigator(
+	{
+		Faves: {
+			screen: Faves
+		}
+	},
+	{
+		initialRouteName: 'Faves'
+	}
+)
+
+const AppMapStack = createStackNavigator(
+	{
+		AppMap: {
+			screen: AppMap
+		}
+	},
+	{
+		initialRouteName: 'AppMap'
+	}
+)
+
+const ScheduleStack = createStackNavigator(
+	{
+		Schedule: {
+			screen: Schedule
+		}
+	},
+	{
+		initialRouteName: 'Schedule'
 	}
 )
 
 const TabNavigator = createBottomTabNavigator(
 	{
-		Home: {
-			screen: HomeStack,
-		}
+		Schedule: {
+			screen: ScheduleStack,
+		},
+		AppMap: {
+			screen: AppMapStack,
+		},
+		Faves: {
+			screen: FavesStack,
+		},
+		About: {
+			screen: AboutStack
+		},
 	},
 	{
 		defaultNavigationOptions: ({ navigation }) => ({
@@ -28,10 +74,17 @@ const TabNavigator = createBottomTabNavigator(
 			)
 		}),
 		tabBarOptions: {
-			activeTintColor: 'gray',
-			inactiveTintColor: 'gray',
+			activeTintColor: 'white',
+			inactiveTintColor: 'white',
+			activeBackgroundColor: 'black',
+			inactiveBackgroundColor: 'black',
+			labelStyle: {
+				fontSize: 14,
+			},
 			style: {
+				height: 70,
 				paddingTop: 5,
+				backgroundColor: 'black'
 			}
 		},
 		animationEnabled: true,

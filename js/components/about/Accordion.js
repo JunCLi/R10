@@ -12,7 +12,6 @@ export default Accordion = (props) => {
 	
 	const collapsableIcon = collapsableState ? 'minus' : 'plus'
 
-	console.log(props)
 	return (
 		<TouchableOpacity onPress={handleCollapsable}>
 			<View style={accordianStyles.header}>

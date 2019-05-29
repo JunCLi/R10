@@ -1,8 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import { Button, Divider, Text } from 'react-native-elements'
+import { ScrollView } from 'react-native-gesture-handler'
+import { Divider, Text } from 'react-native-elements'
 import moment from 'moment'
 
 import { useQuery } from 'react-apollo-hooks'
@@ -20,6 +20,8 @@ export default SessionDetail = props => {
 		variables: {id: props.navigation.state.params.id}
 	})
 
+	console.log(props)
+
 	if (error) return (
 		<View><Text>error...</Text></View>
 	)
@@ -27,11 +29,6 @@ export default SessionDetail = props => {
 		<View><Text>loading...</Text></View>
 	)
 
-	const handleCheckSpeaker = speakerId => {
-		props.navigation.navigate('Speaker', {id: speakerId})
-	}
-
-	console.log(data.Session)
 	return (
 		<ScrollView style={sessionStyles.mainContainer}>
 			<SessionLocation location={data.Session.location }/>
@@ -43,7 +40,8 @@ export default SessionDetail = props => {
 			<SessionSpeaker
 				speakerName={data.Session.speaker.name}
 				speakerImageUri={data.Session.speaker.image}
-				onPress={() => handleCheckSpeaker(data.Session.speaker.id)}
+				speakerId={data.Session.speaker.id}
+				propsNavigationNavigate={props.navigation.navigate}
 			/>
 			<Divider />
 			<SessionFavourite />

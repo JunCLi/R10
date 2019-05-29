@@ -28,7 +28,6 @@ export default About = () => {
 		})
 	}
 
-	console.log(data)
 	return (
 		<ScrollView style={aboutStyles.aboutContainer}>
 			<Fragment>

@@ -42,7 +42,7 @@ export default Schedule = props => {
 	}
 
 	const handleCheckSession = (sessionId) => {
-		props.navigation.navigate('SessionDetail', {id: sessionId})
+		props.navigation.navigate('Session', {id: sessionId})
 	}
 
 	return (

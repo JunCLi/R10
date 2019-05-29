@@ -38,3 +38,15 @@ export const getSessionDetailQuery = gql`
 		}
 	}
 `
+
+export const getSpeakerDetailQuery = gql`
+	query getSpeakerByID($id: ID!){
+		Speaker(id: $id) {
+			id
+			bio
+			image
+			name
+			url
+		}
+	}
+`

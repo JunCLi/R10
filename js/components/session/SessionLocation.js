@@ -7,9 +7,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons'
 import { sessionLocationStyles } from '../../stylesheets/sessionStyles'
 
 export default SessionLocation = props => {
-	console.log('sessionLocation Props: ', props)
 	const { location } = props
-
 
 	return (
 		<View style={sessionLocationStyles.container}>

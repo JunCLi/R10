@@ -57,7 +57,7 @@ const TabNavigator = createBottomTabNavigator(
 		Schedule: {
 			screen: ScheduleStack,
 		},
-		AppMap: {
+		Map: {
 			screen: AppMapStack,
 		},
 		Faves: {

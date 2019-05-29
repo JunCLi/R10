@@ -14,7 +14,7 @@ export const getTabBarIcon = (navigation, focused, tintColor) => {
 	} else if (routeName === 'Faves') {
 		IconComponent = IonIcon
 		iconName = 'ios-heart'
-	} else if (routeName === 'AppMap') {
+	} else if (routeName === 'Map') {
 		IconComponent = IonIcon
 		iconName = 'ios-map'
 	} else if (routeName === 'Schedule') {

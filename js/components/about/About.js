@@ -12,14 +12,8 @@ import { aboutStyles } from '../../stylesheets/aboutStyles'
 import Accordion from './Accordion'
 
 export default About = () => {
-	const [activeSections, setActiveSections] = useState({})
 	const { data, error, loading } = useQuery(getAllConductsQuery)
-
-	const handleCollapsable = (key) => {
-		setActiveSections(prevState => {
-			return { ...prevState, [key]: !prevState[key]}
-		})
-	}
+	const [activeSections, setActiveSections] = useState({})
 	
 	if (error) return (
 		<View><Text>error...</Text></View>
@@ -27,6 +21,12 @@ export default About = () => {
 	if (loading) return (
 		<View><Text>loading...</Text></View>
 	)
+
+	const handleCollapsable = key => {
+		setActiveSections(prevState => {
+			return { ...prevState, [key]: !prevState[key]}
+		})
+	}
 
 	console.log(data)
 	return (
@@ -46,7 +46,12 @@ export default About = () => {
 				<Text h2 style={aboutStyles.headerText}>Code of Conduct</Text>
 				<View>
 					{ data.allConducts.map(conduct => (
-						<Accordion key={conduct.id} handleCollapsable={() => handleCollapsable(conduct.id)} conduct={conduct} collapsableState={activeSections[conduct.id]}/>
+						<Accordion 
+							key={conduct.id}
+							handleCollapsable={() => handleCollapsable(conduct.id)}
+							conduct={conduct}
+							collapsableState={activeSections[conduct.id]}
+						/>
 					))}
 				</View>
 			</Fragment>

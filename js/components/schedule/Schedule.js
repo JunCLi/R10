@@ -9,7 +9,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons'
 import { useQuery } from 'react-apollo-hooks'
 import { getAllSessionsQuery } from '../../graphql/queries'
 
-export default Schedule = () => {
+export default Schedule = props => {
 	const { data, error, loading } = useQuery(getAllSessionsQuery)
 	const [ favourite, setFavourite ] = useState({})
 
@@ -41,6 +41,10 @@ export default Schedule = () => {
 		})
 	}
 
+	const handleCheckSession = (sessionId) => {
+		props.navigation.navigate('SessionDetail', {id: sessionId})
+	}
+
 	return (
 		<ScrollView>
 			<Text>Schedule</Text>
@@ -58,9 +62,11 @@ export default Schedule = () => {
 									size={15}
 									color={
 										favourite[session.id] ? 'red' : 'grey'
-									} />
+									}
+									onPress={() => handleFavourite(session.id)}
+								/>
 							}
-							onPress={() => handleFavourite(session.id)}
+							onPress={() => handleCheckSession(session.id)}
 						/>
 					))}
 				</View>

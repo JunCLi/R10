@@ -21,3 +21,20 @@ export const getAllSessionsQuery = gql`
 		}
 	}
 `
+
+export const getSessionDetailQuery = gql`
+	query getSessionByID($id: ID!){
+		Session(id: $id ) {
+			id
+			description
+			location
+			startTime
+			title
+			speaker {
+				id
+				name
+				image
+			}
+		}
+	}
+`

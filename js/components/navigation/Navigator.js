@@ -6,6 +6,7 @@ import About from '../about/About'
 import AppMap from '../appMap/AppMap'
 import Faves from '../faves/Faves'
 import Schedule from '../schedule/Schedule'
+import SessionDetail from '../session/SessionDetail'
 
 
 const AboutStack = createStackNavigator(
@@ -45,6 +46,9 @@ const ScheduleStack = createStackNavigator(
 	{
 		Schedule: {
 			screen: Schedule
+		},
+		SessionDetail: {
+			screen: SessionDetail
 		}
 	},
 	{

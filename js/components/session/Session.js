@@ -13,7 +13,7 @@ import { sessionStyles } from '../../stylesheets/sessionStyles'
 import SessionLocation from './SessionLocation'
 import SessionMain from './SessionMain'
 import SessionSpeaker from './SessionSpeaker'
-import SessionFavourite from './SessionFavourite'
+import CenteredRoundedButton from '../utils/CenteredRoundedButton'
 
 export default SessionDetail = props => {
 	const { data, error, loading } = useQuery(getSessionDetailQuery, {
@@ -44,7 +44,9 @@ export default SessionDetail = props => {
 				propsNavigationNavigate={props.navigation.navigate}
 			/>
 			<Divider />
-			<SessionFavourite />
+			<CenteredRoundedButton 
+				buttonText={'Add to Faves'}
+			/>
 		</ScrollView>
 	)
 }

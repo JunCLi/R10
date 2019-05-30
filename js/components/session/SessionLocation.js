@@ -7,12 +7,12 @@ import IonIcon from 'react-native-vector-icons/Ionicons'
 import { sessionLocationStyles } from '../../stylesheets/sessionStyles'
 
 export default SessionLocation = props => {
-	const { location } = props
+	const { favourite, location } = props
 
 	return (
 		<View style={sessionLocationStyles.container}>
 			<Text style={sessionLocationStyles.text}>{location}</Text>
-			<IonIcon name='ios-heart' size={20} color='grey' />
+			{	favourite && <IonIcon name='ios-heart' size={20} color='red' /> }
 		</View>
 	)
 }

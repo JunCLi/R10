@@ -6,13 +6,14 @@ import { toggleFavouriteMutation } from '../../graphql/mutations'
 import CenteredRoundedButton from '../utils/CenteredRoundedButton'
 
 export default SessionFavourite = (props) => {
+	const { buttonText, id } = props
 	const toggleFavourite = useMutation(toggleFavouriteMutation, {
-		variables: { id: props.navigation.state.params.id}
+		variables: { id: id}
 	})
 	
 	return (
 		<CenteredRoundedButton 
-			buttonText={'Add to Faves'}
+			buttonText={buttonText}
 			buttonFunction={toggleFavourite}
 		/>
 	)

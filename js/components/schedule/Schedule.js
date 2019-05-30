@@ -17,6 +17,7 @@ export default Schedule = props => {
 	const [ favourite, setFavourite ] = useState({})
 
 	useEffect(() => {
+		AsyncStorage.clear()
 		_retreiveData()
 	}, [])
 
@@ -31,7 +32,8 @@ export default Schedule = props => {
 	const _retreiveData = async () => {
 		try {
 			const value = await AsyncStorage.getItem('favSessions2')
-			value && setFavourite(value)
+			const jsonValue = JSON.parse(value)
+			await jsonValue && setFavourite(jsonValue)
 		} catch (err) {
 			throw err
 		}
@@ -63,7 +65,8 @@ export default Schedule = props => {
 		})
 	}
 
-	const handleCheckSession = (sessionId) => {
+	const handleCheckSession = async (sessionId) => {
+		await _retreiveData()
 		props.navigation.navigate('Session', {id: sessionId})
 	}
 

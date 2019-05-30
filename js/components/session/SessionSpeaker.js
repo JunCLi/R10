@@ -8,7 +8,6 @@ import { sessionSpeakerStyles } from '../../stylesheets/sessionStyles'
 export default SessionSpeaker = props => {
 	const { speakerName, speakerImageUri, speakerId } = props
 
-	console.log('sessionSpeaker', props)
 	const handleCheckSpeaker = () => {
 		props.propsNavigationNavigate('Speaker', {id: speakerId})
 	}

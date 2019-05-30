@@ -2,16 +2,41 @@ import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
 
 import { ScrollView } from 'react-native-gesture-handler'
-import { ListItem, Text } from 'react-native-elements'
+import { Text } from 'react-native-elements'
 import moment from 'moment'
-import IonIcon from 'react-native-vector-icons/Ionicons'
+import AsyncStorage from '@react-native-community/async-storage'
 
 import { useQuery } from 'react-apollo-hooks'
 import { getAllSessionsQuery } from '../../graphql/queries'
 
+import ScheduleTimeSlot from './ScheduleTimeSlot'
+import ScheduleItem from './ScheduleItem'
+
 export default Schedule = props => {
 	const { data, error, loading } = useQuery(getAllSessionsQuery)
 	const [ favourite, setFavourite ] = useState({})
+
+	useEffect(() => {
+		_retreiveData()
+	}, [])
+
+	const _storeData = async data => {
+		try {
+			await AsyncStorage.setItem('favSessions2', JSON.stringify(data))
+		} catch(err) {
+			throw err
+		}
+	}
+
+	const _retreiveData = async () => {
+		try {
+			const value = await AsyncStorage.getItem('favSessions2')
+			value && setFavourite(value)
+		} catch (err) {
+			throw err
+		}
+	}
+
 
 	if (error) return (
 		<View><Text>error...</Text></View>
@@ -29,14 +54,11 @@ export default Schedule = props => {
 		}, {})
 	}
 
-	// let groupedSessionsObject
-	// useEffect(() => {
-	// 	groupedSessionsObject = groupObjectBy(data.allSessions, 'startTime')
-	// }, [])
 	const groupedSessionsObject = groupObjectBy(data.allSessions, 'startTime')
 
 	const handleFavourite = key => {
 		setFavourite(prevState => {
+			_storeData({...prevState, [key]: !prevState[key]})
 			return { ...prevState, [key]: !prevState[key]}
 		})
 	}
@@ -47,26 +69,20 @@ export default Schedule = props => {
 
 	return (
 		<ScrollView>
-			<Text>Schedule</Text>
 			{	Object.keys(groupedSessionsObject).map((timeSlot, index) => (
 				<View key={timeSlot}>
-					<Text>{moment(timeSlot).subtract(3, 'hours').format('h:mm a')}</Text>
+					<ScheduleTimeSlot
+						timeSlot={moment(timeSlot).subtract(3, 'hours').format('h:mm a')}
+					/>
 					{groupedSessionsObject[timeSlot].map(session => (
-						<ListItem
+						<ScheduleItem
 							key={session.id}
+							id={session.id}
 							title={session.title}
 							subtitle={session.location}
-							rightIcon={
-								<IonIcon
-									name='ios-heart'
-									size={15}
-									color={
-										favourite[session.id] ? 'red' : 'grey'
-									}
-									onPress={() => handleFavourite(session.id)}
-								/>
-							}
-							onPress={() => handleCheckSession(session.id)}
+							favourite={favourite[session.id]}
+							handleCheckSession={handleCheckSession}
+							handleFavourite={handleFavourite}
 						/>
 					))}
 				</View>
@@ -74,5 +90,3 @@ export default Schedule = props => {
 		</ScrollView>
 	)
 }
-
-

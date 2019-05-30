@@ -4,6 +4,7 @@ import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { Divider, Text } from 'react-native-elements'
 import moment from 'moment'
+import AsyncStorage from '@react-native-community/async-storage'
 
 import { useQuery } from 'react-apollo-hooks'
 import { getSessionDetailQuery } from '../../graphql/queries'
@@ -13,14 +14,13 @@ import { sessionStyles } from '../../stylesheets/sessionStyles'
 import SessionLocation from './SessionLocation'
 import SessionMain from './SessionMain'
 import SessionSpeaker from './SessionSpeaker'
-import CenteredRoundedButton from '../utils/CenteredRoundedButton'
+import SessionFavourite from './SessionFavourite';
+
 
 export default SessionDetail = props => {
 	const { data, error, loading } = useQuery(getSessionDetailQuery, {
 		variables: {id: props.navigation.state.params.id}
 	})
-
-	console.log(props)
 
 	if (error) return (
 		<View><Text>error...</Text></View>
@@ -44,9 +44,7 @@ export default SessionDetail = props => {
 				propsNavigationNavigate={props.navigation.navigate}
 			/>
 			<Divider />
-			<CenteredRoundedButton 
-				buttonText={'Add to Faves'}
-			/>
+			<SessionFavourite {...props}/>
 		</ScrollView>
 	)
 }

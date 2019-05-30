@@ -5,6 +5,8 @@ import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { onError } from 'apollo-link-error'
 
+import { Mutation } from './graphql/resolvers'
+
 const appCache = new InMemoryCache()
 
 const errorLink = onError(({ graphQLErrors }) => {
@@ -22,7 +24,10 @@ const httpLink = createHttpLink({
 
 const apolloClient = new ApolloClient({
   link: ApolloLink.from([errorLink, stateLink, httpLink]),
-  cache: appCache
+	cache: appCache,
+	resolvers: {
+		Mutation
+	}
 })
 
 export default apolloClient

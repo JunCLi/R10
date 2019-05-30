@@ -3,6 +3,7 @@ import { View } from 'react-native'
 
 import { ScrollView } from 'react-native-gesture-handler'
 import { Text } from 'react-native-elements'
+import { NavigationEvents } from 'react-navigation'
 import moment from 'moment'
 import AsyncStorage from '@react-native-community/async-storage'
 
@@ -17,13 +18,12 @@ export default Schedule = props => {
 	const [ favourite, setFavourite ] = useState({})
 
 	useEffect(() => {
-		AsyncStorage.clear()
 		_retreiveData()
 	}, [])
 
 	const _storeData = async data => {
 		try {
-			await AsyncStorage.setItem('favSessions2', JSON.stringify(data))
+			await AsyncStorage.setItem('favSessions', JSON.stringify(data))
 		} catch(err) {
 			throw err
 		}
@@ -31,14 +31,13 @@ export default Schedule = props => {
 
 	const _retreiveData = async () => {
 		try {
-			const value = await AsyncStorage.getItem('favSessions2')
+			const value = await AsyncStorage.getItem('favSessions')
 			const jsonValue = JSON.parse(value)
 			await jsonValue && setFavourite(jsonValue)
 		} catch (err) {
 			throw err
 		}
 	}
-
 
 	if (error) return (
 		<View><Text>error...</Text></View>
@@ -72,6 +71,11 @@ export default Schedule = props => {
 
 	return (
 		<ScrollView>
+			<NavigationEvents
+				onDidFocus= {() => {
+					_retreiveData()
+				}}
+			/>
 			{	Object.keys(groupedSessionsObject).map((timeSlot, index) => (
 				<View key={timeSlot}>
 					<ScheduleTimeSlot

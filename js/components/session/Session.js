@@ -29,7 +29,7 @@ export default SessionDetail = props => {
 
 	const _retreiveData = async () => {
 		try {
-			const value = await AsyncStorage.getItem('favSessions2')
+			const value = await AsyncStorage.getItem('favSessions')
 			const jsonValue = JSON.parse(value)
 			await jsonValue && setFavourite(jsonValue)
 		} catch (err) {
@@ -62,6 +62,8 @@ export default SessionDetail = props => {
 			/>
 			<Divider />
 			<SessionFavourite
+				favourite={favourite}
+				setFavourite={setFavourite}
 				buttonText={
 					favourite[props.navigation.state.params.id] ?
 					'Remove from Faves' :

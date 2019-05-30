@@ -2,7 +2,7 @@ import React from 'react'
 import { Linking, View } from 'react-native'
 
 import { ScrollView } from 'react-native-gesture-handler'
-import { Alert, Avatar, Text } from 'react-native-elements' 
+import { Alert, Avatar, Button, Header, Text } from 'react-native-elements' 
 
 import { useQuery } from 'react-apollo-hooks'
 import { getSpeakerDetailQuery } from '../../graphql/queries'
@@ -12,8 +12,9 @@ import { speakerStyles } from '../../stylesheets/speakerStyles'
 import CenteredRoundedButton from '../utils/CenteredRoundedButton'
 
 export default Speaker = props => {
+	const { id, handleModal } = props
 	const { data, error, loading } = useQuery(getSpeakerDetailQuery, {
-		variables: {id: props.navigation.state.params.id}
+		variables: {id: id}
 	})
 
 	if (error) return (
@@ -23,9 +24,7 @@ export default Speaker = props => {
 		<View><Text>loading...</Text></View>
 	)
 
-	console.log(data)
-
-	const handleButtonFunction = () => {
+	const handleOpenLinkFunction = () => {
 		Linking.canOpenURL(data.Speaker.url).then(supported => {
 			if (supported) {
 				Linking.openURL(data.Speaker.url) 
@@ -52,7 +51,7 @@ export default Speaker = props => {
 			<Text style={speakerStyles.speakerBio}>{data.Speaker.bio}</Text>
 			<CenteredRoundedButton 
 				buttonText={'Read More on Wikipedia'}
-				buttonFunction={handleButtonFunction}
+				buttonFunction={handleOpenLinkFunction}
 			/>
 		</ScrollView>
 	)

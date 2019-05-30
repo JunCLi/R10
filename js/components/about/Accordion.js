@@ -15,10 +15,10 @@ export default Accordion = (props) => {
 	return (
 		<TouchableOpacity onPress={handleCollapsable}>
 			<View style={accordianStyles.header}>
-				<AwesomeIcon name={collapsableIcon} size={20} color='purple' style={accordianStyles.headerIcon}/>
+				<AwesomeIcon name={collapsableIcon} size={20} color='#aa55d6' style={accordianStyles.headerIcon}/>
 				<Text style={accordianStyles.headerText}>{conduct.title}</Text>
 			</View>
-			{collapsableState && <Text>{conduct.description}</Text>}
+			{collapsableState && <Text style={accordianStyles.bodyText}>{conduct.description}</Text>}
 		</TouchableOpacity>
 	)
 }

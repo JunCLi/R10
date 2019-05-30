@@ -4,6 +4,30 @@ export const sessionStyles = StyleSheet.create({
 	mainContainer: {
 		padding: 25,
 	},
+
+	lightBoxHeader: {
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		flexWrap: 'nowrap',
+		padding: 40,
+		backgroundColor: 'black',
+	},
+
+	lightBoxClose: {
+		marginRight: 20,
+	},
+
+	lightBoxHeaderText: {
+		color: 'white',
+		fontSize: 25,
+		textAlign: 'center',
+	},
+
+	screwLightBox: {
+		color: 'black',
+	}
 })
 
 export const sessionLocationStyles = StyleSheet.create({

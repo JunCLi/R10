@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
 
-import { ScrollView } from 'react-native-gesture-handler'
-import { Divider, Text } from 'react-native-elements'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import { Button, Divider, Text } from 'react-native-elements'
 import moment from 'moment'
 import AsyncStorage from '@react-native-community/async-storage'
+import Lightbox from 'react-native-lightbox'
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
 
 import { useQuery } from 'react-apollo-hooks'
 import { getSessionDetailQuery } from '../../graphql/queries'
@@ -14,11 +16,13 @@ import { sessionStyles } from '../../stylesheets/sessionStyles'
 import SessionLocation from './SessionLocation'
 import SessionMain from './SessionMain'
 import SessionSpeaker from './SessionSpeaker'
-import SessionFavourite from './SessionFavourite';
+import SessionFavourite from './SessionFavourite'
+import Speaker from '../speaker/Speaker'
 
 
 export default SessionDetail = props => {
 	const [ favourite, setFavourite ] = useState({})
+	const [ showSpeaker, setShowSpeaker ] = useState(false)
 	const { data, error, loading } = useQuery(getSessionDetailQuery, {
 		variables: {id: props.navigation.state.params.id}
 	})
@@ -35,6 +39,10 @@ export default SessionDetail = props => {
 		} catch (err) {
 			throw err
 		}
+	}
+
+	const handleModal = () => {
+		setShowSpeaker(!showSpeaker)
 	}
 
 	if (error) return (
@@ -54,12 +62,30 @@ export default SessionDetail = props => {
 				time={moment(data.Session.startTime).subtract(3, 'hours').format('h:mm a')}
 				description={data.Session.description}
 			/>
-			<SessionSpeaker
-				speakerName={data.Session.speaker.name}
-				speakerImageUri={data.Session.speaker.image}
-				speakerId={data.Session.speaker.id}
-				propsNavigationNavigate={props.navigation.navigate}
-			/>
+			<Lightbox
+				renderHeader={close => (
+					<View style={sessionStyles.lightBoxHeader} >
+						<TouchableOpacity
+							style={sessionStyles.lightBoxClose}
+							onPress={close}
+						>
+							<AwesomeIcon name='close' size={30} color='white' />
+						</TouchableOpacity>
+						<Text style={sessionStyles.lightBoxHeaderText}>About the Speaker</Text>
+						<View style={sessionStyles.screwLightBox}>
+							<AwesomeIcon name='close' size={30} color='black' />
+						</View>
+					</View>
+				)}
+				renderContent={() => <Speaker id={data.Session.speaker.id}/>}
+			>
+				<SessionSpeaker
+					speakerName={data.Session.speaker.name}
+					speakerImageUri={data.Session.speaker.image}
+					speakerId={data.Session.speaker.id}
+					propsNavigationNavigate={props.navigation.navigate}
+				/>
+			</Lightbox>
 			<Divider />
 			<SessionFavourite
 				favourite={favourite}

@@ -7,7 +7,7 @@ import { centeredRoundedButton } from '../../stylesheets/utilsStyles'
 
 export default SessionFavourite = props => {
 	const { buttonFunction, buttonText } = props
-
+	
 	return (
 		<View style={centeredRoundedButton.container}>
 			<Button

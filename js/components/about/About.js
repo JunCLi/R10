@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react'
+import React, { useState} from 'react'
 import { View } from 'react-native'
 
 import { ScrollView } from 'react-native-gesture-handler';
@@ -30,19 +30,19 @@ export default About = () => {
 
 	return (
 		<ScrollView style={aboutStyles.aboutContainer}>
-			<Fragment>
-				<Text h1 style={aboutStyles.headerText}>{'<R10>'}</Text>
-				<Divider />
+			<View>
+				<Text style={aboutStyles.mainHeader}>{'<R10>'}</Text>
+				<Divider style={aboutStyles.divider}/>
 				<Text style={aboutStyles.bodyText}>R10 is a conference that focuses on just about any topic related to dev.</Text>
-			</Fragment>
+			</View>
 			
-			<Fragment>
-				<Text h2 style={aboutStyles.headerText}>Date & Venue</Text>
+			<View style={aboutStyles.dateAndVenue}>
+				<Text style={aboutStyles.headerText}>Date & Venue</Text>
 				<Text style={aboutStyles.bodyText}>The R10 conference will take place on February 30, 2020 in Vancouver, BC.</Text>
-			</Fragment>
+			</View>
 
-			<Fragment>
-				<Text h2 style={aboutStyles.headerText}>Code of Conduct</Text>
+			<>
+				<Text style={aboutStyles.headerText}>Code of Conduct</Text>
 				<View>
 					{ data.allConducts.map(conduct => (
 						<Accordion 
@@ -53,7 +53,7 @@ export default About = () => {
 						/>
 					))}
 				</View>
-			</Fragment>
+			</>
 		</ScrollView>
 	)
 } 

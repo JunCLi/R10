@@ -13,50 +13,112 @@ import Speaker from '../speaker/Speaker'
 const AboutStack = createStackNavigator(
 	{
 		About: {
-			screen: About
+			screen: About,
+			navigationOptions: {
+				title: 'About',
+			},
 		}
 	},
 	{
-		initialRouteName: 'About'
+		initialRouteName: 'About',
+		defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#aa55d6',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+				fontSize: 25,
+				fontWeight: 'bold',
+				marginBottom: 10,
+      },
+    },
 	}
 )
 
 const FavesStack = createStackNavigator(
 	{
 		Faves: {
-			screen: Faves
+			screen: Faves,
+			navigationOptions: {
+				title: 'Faves',
+			},
 		}
 	},
 	{
-		initialRouteName: 'Faves'
+		initialRouteName: 'Faves',
+		defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#aa55d6',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+				fontSize: 25,
+        fontWeight: 'bold',
+				marginBottom: 10,
+      },
+    },
 	}
 )
 
 const AppMapStack = createStackNavigator(
 	{
 		AppMap: {
-			screen: AppMap
+			screen: AppMap,
+			navigationOptions: {
+				title: 'Map',
+			},
 		}
 	},
 	{
-		initialRouteName: 'AppMap'
+		initialRouteName: 'AppMap',
+		defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#aa55d6',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+				fontSize: 25,
+        fontWeight: 'bold',
+				marginBottom: 10,
+      },
+    },
 	}
 )
 
 const ScheduleStack = createStackNavigator(
 	{
 		Schedule: {
-			screen: Schedule
+			screen: Schedule,
+			navigationOptions: {
+				title: 'Schedule',
+			},
 		},
 		Session: {
-			screen: Session
+			screen: Session,
+			navigationOptions: {
+				title: 'Session',
+			},
 		},
 		Speaker: {
-			screen: Speaker
+			screen: Speaker,
+			navigationOptions: {
+				title: 'Speaker',
+			},
 		}
 	},
 	{
-		initialRouteName: 'Schedule'
+		initialRouteName: 'Schedule',
+		defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#aa55d6',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+				fontSize: 25,
+        fontWeight: 'bold',
+				marginBottom: 10,
+      },
+    },
 	}
 )
 

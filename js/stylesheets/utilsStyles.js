@@ -10,6 +10,7 @@ export const centeredRoundedButton = StyleSheet.create({
 
 	button: {
 		borderRadius: 50,
+		marginBottom: 50,
 		paddingVertical: 13,
 		width: '100%',
 	},

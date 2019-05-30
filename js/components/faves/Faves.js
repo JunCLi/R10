@@ -36,13 +36,20 @@ export default Faves = props => {
 		}
 	}
 
+	const _retreiveData = async () => {
+		try {
+			const value = await AsyncStorage.getItem('favSessions')
+			const jsonValue = JSON.parse(value)
+			await jsonValue && setFavourite(jsonValue)
+		} catch (err) {
+			throw err
+		}
+	}
+
 	const groupObjectBy = (objectArray, property) => {
-		const faveObjectArray = objectArray.filter(object => {
-			const favouritedSessions = Object.keys(favourite).filter((id, index) => (
-				object.id === id && favourite[id]
-			))
-			return favouritedSessions.length > 0
-		})
+		const faveObjectArray = objectArray.filter(object => (
+			favourite[object.id] === true
+		))
 
 		return faveObjectArray.reduce((acc, object) => {
 			const key = object[property]
@@ -64,16 +71,6 @@ export default Faves = props => {
 	const handleCheckSession = async (sessionId) => {
 		await _retreiveData()
 		props.navigation.navigate('Session', {id: sessionId})
-	}
-
-	const _retreiveData = async () => {
-		try {
-			const value = await AsyncStorage.getItem('favSessions')
-			const jsonValue = JSON.parse(value)
-			await jsonValue && setFavourite(jsonValue)
-		} catch (err) {
-			throw err
-		}
 	}
 
 	return (

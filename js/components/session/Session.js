@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
 
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import { Button, Divider, Text } from 'react-native-elements'
+import { Divider, Text } from 'react-native-elements'
 import moment from 'moment'
 import AsyncStorage from '@react-native-community/async-storage'
 import Lightbox from 'react-native-lightbox'
@@ -39,10 +39,6 @@ export default SessionDetail = props => {
 		} catch (err) {
 			throw err
 		}
-	}
-
-	const handleModal = () => {
-		setShowSpeaker(!showSpeaker)
 	}
 
 	if (error) return (

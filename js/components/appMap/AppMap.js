@@ -1,7 +1,7 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
-import MapView, { Marker, Callout } from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 
 export default AppMap = () => {
 	return (

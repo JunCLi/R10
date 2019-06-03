@@ -1,5 +1,6 @@
 import { createAppContainer, createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 
+import { defaultStackNavigationOptions, tabBarOptions } from './NavigationOptions'
 import { getTabBarIcon } from './TabBarIcons'
 
 import About from '../about/About'
@@ -8,7 +9,6 @@ import Faves from '../faves/Faves'
 import Schedule from '../schedule/Schedule'
 import Session from '../session/Session'
 import Speaker from '../speaker/Speaker'
-
 
 const AboutStack = createStackNavigator(
 	{
@@ -21,17 +21,7 @@ const AboutStack = createStackNavigator(
 	},
 	{
 		initialRouteName: 'About',
-		defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#aa55d6',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-				fontSize: 25,
-				fontWeight: 'bold',
-				marginBottom: 10,
-      },
-    },
+		defaultNavigationOptions: defaultStackNavigationOptions
 	}
 )
 
@@ -42,21 +32,23 @@ const FavesStack = createStackNavigator(
 			navigationOptions: {
 				title: 'Faves',
 			},
+		},
+		Session: {
+			screen: Session,
+			navigationOptions: {
+				title: 'Session',
+			},
+		},
+		Speaker: {
+			screen: Speaker,
+			navigationOptions: {
+				title: 'Speaker',
+			},
 		}
 	},
 	{
 		initialRouteName: 'Faves',
-		defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#aa55d6',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-				fontSize: 25,
-        fontWeight: 'bold',
-				marginBottom: 10,
-      },
-    },
+		defaultNavigationOptions: defaultStackNavigationOptions
 	}
 )
 
@@ -71,17 +63,7 @@ const AppMapStack = createStackNavigator(
 	},
 	{
 		initialRouteName: 'AppMap',
-		defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#aa55d6',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-				fontSize: 25,
-        fontWeight: 'bold',
-				marginBottom: 10,
-      },
-    },
+		defaultNavigationOptions: defaultStackNavigationOptions
 	}
 )
 
@@ -108,17 +90,7 @@ const ScheduleStack = createStackNavigator(
 	},
 	{
 		initialRouteName: 'Schedule',
-		defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#aa55d6',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-				fontSize: 25,
-        fontWeight: 'bold',
-				marginBottom: 10,
-      },
-    },
+		defaultNavigationOptions: defaultStackNavigationOptions
 	}
 )
 
@@ -143,20 +115,7 @@ const TabNavigator = createBottomTabNavigator(
 				getTabBarIcon(navigation, focused, tintColor)
 			)
 		}),
-		tabBarOptions: {
-			activeTintColor: 'white',
-			inactiveTintColor: 'grey',
-			activeBackgroundColor: 'black',
-			inactiveBackgroundColor: 'black',
-			labelStyle: {
-				fontSize: 14,
-			},
-			style: {
-				height: 70,
-				paddingTop: 5,
-				backgroundColor: 'black'
-			}
-		},
+		tabBarOptions: tabBarOptions,
 		animationEnabled: true,
 		swipreEnabled: true,
 	}
